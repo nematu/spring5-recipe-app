@@ -1,6 +1,7 @@
-package guru.springframework.spring5recipeapp.controllers.domain;
+package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -22,14 +23,23 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo add
-    //private Difficulty difficulty;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
 
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_catagory",
+    joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns  =@JoinColumn(name = "category_id"))
+     private Set<Category> categories;
 
     public Long getId() {
         return id;
@@ -109,5 +119,49 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories()
+    {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories)
+    {
+        this.categories = categories;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Recipe{" +
+                "description='" + description + '\'' +
+                ", prepTime=" + prepTime +
+                ", cookTime=" + cookTime +
+                ", servings=" + servings +
+                ", source='" + source + '\'' +
+                ", url='" + url + '\'' +
+                ", directions='" + directions + '\'' +
+                ", ingredients=" + ingredients +
+                ", image=" + Arrays.toString(image) +
+                ", difficulty=" + difficulty +
+                ", notes=" + notes +
+                '}';
     }
 }

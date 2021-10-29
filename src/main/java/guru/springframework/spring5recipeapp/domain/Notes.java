@@ -1,9 +1,10 @@
-package guru.springframework.spring5recipeapp.controllers.domain;
+package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
 
 /**
- * Created by jt on 6/13/17.
+ * @author nemat
+ * @version 1.2
  */
 @Entity
 public class Notes {

@@ -1,15 +1,16 @@
-package guru.springframework.spring5recipeapp.controllers.domain;
+package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
- * Created by Nematu
+ * @author nemat
+ * @version 1.2
  */
 
 @Entity
-public class Ingredient
-{
+public class Ingredient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,59 +23,44 @@ public class Ingredient
     @ManyToOne
     private Recipe recipe;
 
-    public Ingredient()
-    {
-
-    }
-
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public BigDecimal getAmount()
-    {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount)
-    {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public UnitOfMeasure getUam()
-    {
-        return uom;
-    }
-
-    public void setUam(UnitOfMeasure uam)
-    {
-        this.uom = uam;
-    }
-
-    public Recipe getRecipe()
-    {
+    public Recipe getRecipe() {
         return recipe;
     }
 
-    public void setRecipe(Recipe recipe)
-    {
+    public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 
     @Override
@@ -84,6 +70,8 @@ public class Ingredient
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
+                ", uom=" + uom +
+                ", recipe=" + recipe +
                 '}';
     }
 }
